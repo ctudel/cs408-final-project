@@ -26,13 +26,13 @@ The idea is to have each player have, but not limited to, one player id to which
 - The timer should be simple, in that every 60 seconds should convert to a minute and every 60 minutes should convert to an hour --- updating dynamically during play. I could simply have the counter increment without conversion, but then this might get confused with the points. If there is not much time, this might not be seen in the final version.
 - Every so seconds, the speed of the obstacles moving and, eventually, the amount of the obstacles should also increase a considerable amount. As this will be based on the timer, it being in the final version is dependent on the former.
 
-### Obstacle Generation and Enemies
+#### Obstacle Generation and Enemies
 Whether the difficulty increases, or if the game eventually has enemies alongside obstacles, I want to be sure that the obstacles and enemies never generate in an "impossible" pattern, which could be limited by the character's movement, or obstacles blocking the entire height of the playing field---fairness is key.
 
-### Customizable Characters
+#### Customizable Characters
 I'll start with the player being able to pick from a handful of given characters, and potentially move on to custom ones if time permits. I plan to do this by having the user upload an image that they've found as the "sprite" or character. Animation for the characters is still unclear, so it might be a static image with movement and no additional animation.
 
-### Character as a profile
+#### Character as a profile
 Varying profile pictures based on your character selection may be dependent on `Customizable Character` implementation, and whether I can get that stored and retrieved from the database as a blob is going to determine if this feature can make it into the final version. Otherwise, it would simply use the recorded character selected in the database as the profile picture in both the leaderboard and the player stat page.
 
 ### Notes From the Author
