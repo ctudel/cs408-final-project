@@ -1,39 +1,42 @@
 export class Player {
-  constructor(game, x, y, size) {
-    this.x = x;
-    this.y = y;
-    this.size = size;
+  constructor(game, size, color) {
     this.game = game;
+    this.size = size;
+    this.color = color;
+    this.x = game.width / 4;
+    this.y = game.height / 2 - this.size;
     this.jumping = false;
     this.jumpSpeed = 500;
-    this.ground = game.height / 2 - this.size;
+    this.ground = this.y;
 
     // Player jump event
     window.addEventListener("keydown", (e) => {
-      if (e.key === 'w' || e.key === ' ') {
+      if ((e.key === 'w' || e.key === ' ') && this.y >= this.ground) {
         this.jumping = true;
       }
     });
   }
 
   update(secondsPassed) {
+    console.log(this.ground);
+    console.log(this.y);
     // jump to a certain height
     if (this.jumping && this.y > this.ground / 2) {
       this.y -= this.jumpSpeed * secondsPassed * 1.5;
 
       // start falling once max height is reached
-    } else if (this.y < this.ground - 5) {
+    } else if (this.y < this.ground) {
       this.jumping = false;
       this.y += this.jumpSpeed * secondsPassed;
     }
   }
 
-  draw(ctx) {
-    ctx.beginPath();
-    ctx.fillStyle = "rgba(255, 0, 255, 1)";
-    ctx.strokeStyle = "rgba(0, 0, 0, 1)";
-    ctx.fillRect(this.x, this.y, this.size, this.size);
-    ctx.strokeRect(this.x, this.y, this.size + 1, this.size + 1);
+  draw(context) {
+    context.beginPath();
+    context.fillStyle = this.color;
+    context.strokeStyle = "rgba(0, 0, 0, 1)";
+    context.fillRect(this.x, this.y, this.size, this.size);
+    context.strokeRect(this.x, this.y, this.size + 1, this.size + 1);
   }
 
   collisionDetect() {

@@ -1,18 +1,20 @@
 export class Obstacle {
-  constructor(x, y, width, height, exists, ctx) {
-    this.x = x;
-    this.y = y;
-    this.initX = x;
-    this.initY = y;
+  constructor(game, width, height, exists) {
+    this.game = game;
+    this.x = this.game.width + 100;
+    this.y = this.game.height / 2 - height;
+    this.initX = this.x;
+    this.initY = this.y;
     this.width = width;
     this.height = height;
+    this.speedFactor = 4;
     this.exists = exists;
-    this.scored = false;
+    this.hit = false;
   }
 
   update(secondsPassed) {
     if (this.exists && this.x > -this.width) {
-      this.x -= 510 * secondsPassed;
+      this.x -= this.game.speed * this.speedFactor;
 
     } else {
       this.exists = false;
@@ -31,7 +33,7 @@ export class Obstacle {
       this.x = this.initX;
       this.y = this.initY;
       this.exists = true;
-      this.scored = false;
+      this.hit = false;
     }
   }
 }

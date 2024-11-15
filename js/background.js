@@ -1,31 +1,10 @@
-class Layer {
-  constructor(game, width, height, speedFactor, image) {
-    this.game = game,
-      this.width = width,
-      this.height = height,
-      this.speedFactor = speedFactor,
-      this.image = image,
-      this.x = 0;
-    this.y = 0;
-  }
-
-  update() {
-    if (this.x < -this.width) this.x = 0;
-    else this.x -= this.game.speed * this.speedFactor;
-  }
-
-  draw(context) {
-    context.drawImage(this.image, this.x, this.y, this.width, this.height);
-    context.drawImage(this.image, this.x + this.width, this.y, this.width, this.height);
-  }
-}
-
 export class Background {
   constructor(game) {
     this.game = game;
     this.width = 1667;
     this.height = 490;
 
+    // Background layers
     // layer1 is the same as getElementId("layer1");
     this.sky = new Layer(this.game, this.width, this.height, 0, layer1);
     this.cloud1 = new Layer(this.game, this.width, this.height, 0.2, layer2);
@@ -49,6 +28,26 @@ export class Background {
       layer.draw(context);
     });
   }
+}
 
+class Layer {
+  constructor(game, width, height, speedFactor, image) {
+    this.game = game,
+      this.width = width,
+      this.height = height,
+      this.speedFactor = speedFactor,
+      this.image = image,
+      this.x = 0;
+    this.y = 0;
+  }
 
+  update() {
+    if (this.x < -this.width) this.x = 0;
+    else this.x -= this.game.speed * this.speedFactor;
+  }
+
+  draw(context) {
+    context.drawImage(this.image, this.x, this.y, this.width, this.height);
+    context.drawImage(this.image, this.x + this.width, this.y, this.width, this.height);
+  }
 }
