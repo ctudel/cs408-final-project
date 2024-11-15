@@ -22,7 +22,7 @@ export class Player {
       this.y -= this.jumpSpeed * secondsPassed * 1.5;
 
       // start falling once max height is reached
-    } else if (this.y < this.ground) {
+    } else if (this.y < this.ground - 5) {
       this.jumping = false;
       this.y += this.jumpSpeed * secondsPassed;
     }
@@ -30,8 +30,10 @@ export class Player {
 
   draw(ctx) {
     ctx.beginPath();
-    ctx.fillStyle = "rgba(255, 0, 0, 1)";
+    ctx.fillStyle = "rgba(255, 0, 255, 1)";
+    ctx.strokeStyle = "rgba(0, 0, 0, 1)";
     ctx.fillRect(this.x, this.y, this.size, this.size);
+    ctx.strokeRect(this.x, this.y, this.size + 1, this.size + 1);
   }
 
   collisionDetect() {
@@ -39,7 +41,7 @@ export class Player {
     const dy = this.y - this.game.obstacle.y;
     const distance = Math.sqrt(dx * dx + dy * dy);
 
-    if (distance < this.size)
+    if (distance < this.size - 0.1)
       this.game.endGame = true;
   }
 }

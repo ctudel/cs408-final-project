@@ -23,7 +23,10 @@ export class Obstacle {
     if (this.exists) {
       ctx.beginPath();
       ctx.fillStyle = "rgba(0, 0, 255, 1)";
+      ctx.strokeStyle = "rgba(0, 0, 0, 1)";
       ctx.fillRect(this.x, this.y, this.width, this.height);
+      ctx.strokeRect(this.x, this.y, this.width + 1, this.height + 1);
+
     } else {
       this.x = this.initX;
       this.y = this.initY;
