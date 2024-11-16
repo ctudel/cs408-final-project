@@ -7,7 +7,7 @@ export class Obstacle {
     this.initY = this.y;
     this.width = width;
     this.height = height;
-    this.speedFactor = 4;
+    this.speedFactor = 3.5;
     this.exists = exists;
     this.hit = false;
   }

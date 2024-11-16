@@ -30,7 +30,7 @@ class Game {
     // Class objects
     this.background = new Background(this);
     this.player = new Player(this, 100, randomRGB());
-    this.obstacle = new Obstacle(this, 50, 100, true);
+    this.obstacle = new Obstacle(this, 50, 120, true);
   }
 
   update() {
@@ -41,22 +41,18 @@ class Game {
   }
 
   draw() {
-    // Canvas color
-    context.fillStyle = "rgba(35, 35, 35, 0.25)";
-    context.fillRect(0, 0, width, height);
-
     // Moving background
     this.background.draw(this.context);
 
     // Ground layer 
     context.beginPath();
     context.fillStyle = "rgba(139, 69, 19, 1)";
-    context.fillRect(0, height / 2, width, 200);
+    context.fillRect(0, height / 2, width, height);
 
     // Grass layer
     context.beginPath();
     context.fillStyle = "rgba(100, 255, 100, 1)";
-    context.fillRect(0, height / 2, width, 20);
+    context.fillRect(0, height / 2, width, 30);
 
     this.obstacle.draw(this.context);
     this.player.draw(this.context);
@@ -95,6 +91,16 @@ function loop(timeStamp) {
   game.collisionDetect();
 
   if (game.endGame) {
+
+    const popup = document.querySelector(".popup-container");
+    popup.style.display = 'flex';
+
+    const playerID = document.getElementById("player-id");
+    playerID.innerHTML = 'Player ID: Feature Coming Soon';
+
+    const fScore = document.getElementById("final-score");
+    fScore.innerHTML = `Score: ${game.score}`;
+
     cancelAnimationFrame();
   }
 
