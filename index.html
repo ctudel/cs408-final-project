@@ -5,36 +5,43 @@
     <meta name="viewport" content="width=device-width">
     <title>Simple Runner</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/menu.css">
   </head>
 
   <body>
     <nav>
       <ul>
-        <li><a href="./index.html"><img src="./img/assets/home.png" alt="home button"/>Home</a></li>
+        <li><a href="./index.html"><img id="home-btn" src="./img/assets/home.png" alt="home button"/>Home</a></li>
       </ul>
       <h1>Endless Runner</h1>
     </nav>
-    <main>
-      <div class="popup-container">
-        <div id="gameover">
-          <h2>Game Over</h2>
-          <p id="player-id"></p>
-          <p id="final-score"></p>
-        </div>
-      </div>
 
-      <div class="game">
-        <canvas></canvas>
-        <img id="layer1" class="layer" alt="sky background" src="img/assets/sky.png"/>
-        <img id="layer2" class="layer" alt="cloud 1 for background" src="img/assets/clouds_1.png"/>
-        <img id="layer3" class="layer" alt="cloud 2 for background" src="img/assets/clouds_2.png"/>
-        <img id="layer4" class="layer" alt="cloud 3 for background" src="img/assets/clouds_3.png"/>
-        <img id="layer5" class="layer" alt="mountain background 1" src="img/assets/rocks_1.png"/>
-        <img id="layer6" class="layer" alt="mountain background 2" src="img/assets/rocks_2.png"/>
-        <img id="layer7" class="layer" alt="trees" src="img/assets/pines.png"/>
-        <h2 id="counter">Score: 0</h2>
+    <!--Main content w/ menu buttons-->
+    <main>
+      <button id='leaderboard'><img src="./img/assets/trophy.png" alt="leaderboard button"/>Leaderboard</button>
+      <button id='play'><img src="./img/assets/play.png" alt="play button"/>Play</button>
+      <button id='profile'><img src="./img/assets/user.png" alt="profile button"/>Profile</button>
+
+      <!--Popup form when pressing play-->
+      <div id="play-form">
+        <form method="get" action="/pages/game.html">
+          <h2>Enter Player ID</h2>
+          <input id="id" type="text" name="id" placeholder="player id" aria-label="Player ID"/>
+          <input type="submit" value="Start">
+        </form>
       </div>
     </main>
-    <script type="module" src="./js/game.js"></script>
+
+    <!--Credit footer-->
+    <footer>
+      <div>
+        <p>Copyright ©
+          <a href="https://www.flaticon.com/free-icons/play-button" title="play-button icons">Play-button icons created by abdul allib - Flaticon</a>
+          <a href="https://www.flaticon.com/free-icons/trophy" title="trophy icons">Trophy icons created by Freepik - Flaticon</a>
+          <a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a></p>
+      </div>
+    </footer>
+
+    <script src="./js/menu.js"></script>
   </body>
 </html>
