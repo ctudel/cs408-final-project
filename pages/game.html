@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Simple Runner</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/game.css">
+  </head>
+
+  <body>
+    <nav>
+      <ul>
+        <li><a href="../index.html"><img id="home-btn" src="../img/assets/home.png" alt="home button"/>Home</a></li>
+      </ul>
+      <h1>Endless Runner</h1>
+    </nav>
+    <main>
+      <div class="popup-container">
+        <div id="gameover">
+          <h2>Game Over</h2>
+          <p id="player-id"></p>
+          <p id="final-score"></p>
+          <button id="replay"><img alt="replay button" src="../img/assets/replay.png">Replay</button>
+        </div>
+      </div>
+
+      <div class="game">
+        <canvas></canvas>
+        <img id="layer1" class="layer" alt="sky background" src="../img/assets/sky.png"/>
+        <img id="layer2" class="layer" alt="cloud 1 for background" src="../img/assets/clouds_1.png"/>
+        <img id="layer3" class="layer" alt="cloud 2 for background" src="../img/assets/clouds_2.png"/>
+        <img id="layer4" class="layer" alt="cloud 3 for background" src="../img/assets/clouds_3.png"/>
+        <img id="layer5" class="layer" alt="mountain background 1" src="../img/assets/rocks_1.png"/>
+        <img id="layer6" class="layer" alt="mountain background 2" src="../img/assets/rocks_2.png"/>
+        <img id="layer7" class="layer" alt="trees" src="../img/assets/pines.png"/>
+        <h2 id="counter">Score: 0</h2>
+      </div>
+    </main>
+    <script type="module" src="../js/game.js"></script>
+  </body>
+</html>

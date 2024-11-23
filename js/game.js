@@ -2,6 +2,13 @@ import { Player } from "./player.js";
 import { Obstacle } from "./obstacle.js";
 import { Background } from "./background.js";
 
+/* Setup Data */
+// Retrieve from URL
+const urlParams = new URLSearchParams(window.location.search);
+const result = urlParams.get('id');
+let playerId = (result != '' && result != null) ? result : "Anonymous";
+console.log('Player ID: ' + playerId);
+
 // set up canvas
 const canvas = document.querySelector("canvas");
 const context = canvas.getContext("2d");
@@ -16,7 +23,7 @@ function random(min, max) {
 
 // function to generate random RGB color value
 function randomRGB() {
-  return `rgb(${random(0, 255)},${random(0, 255)},${random(0, 255)})`;
+  return `rgb(${random(150, 255)},${random(150, 255)},${random(150, 255)})`;
 }
 
 class Game {
@@ -30,7 +37,7 @@ class Game {
     // Class objects
     this.background = new Background(this);
     this.player = new Player(this, 100, randomRGB());
-    this.obstacle = new Obstacle(this, 50, 120, true);
+    this.obstacle = new Obstacle(this, 50, random(10, (height / 6.5)), true);
   }
 
   update() {
@@ -96,7 +103,7 @@ function loop(timeStamp) {
     popup.style.display = 'flex';
 
     const playerID = document.getElementById("player-id");
-    playerID.innerHTML = 'Player ID: Feature Coming Soon';
+    playerID.innerHTML = `Player ID: ${playerId}`;
 
     const fScore = document.getElementById("final-score");
     fScore.innerHTML = `Score: ${game.score}`;
@@ -108,8 +115,15 @@ function loop(timeStamp) {
   requestAnimationFrame(loop);
 }
 
+// Persist parameters on refresh
+document.getElementById("replay").addEventListener('click', () => {
+  let url = window.location.href;
+  window.location.href = url;
+});
 
 // ===================
 // Program starts here
 // ===================
 requestAnimationFrame(loop);
+console.log(playerId);
+

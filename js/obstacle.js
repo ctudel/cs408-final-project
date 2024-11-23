@@ -1,12 +1,21 @@
+// function to generate random number
+function random(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// function to generate random RGB color value
+function randomRGB() {
+  return `rgb(${random(150, 255)},${random(150, 255)},${random(150, 255)})`;
+}
+
 export class Obstacle {
   constructor(game, width, height, exists) {
     this.game = game;
-    this.x = this.game.width + 100;
+    this.x = this.game.width + width;
     this.y = this.game.height / 2 - height;
-    this.initX = this.x;
-    this.initY = this.y;
     this.width = width;
     this.height = height;
+    this.color = randomRGB();
     this.speedFactor = 3.5;
     this.exists = exists;
     this.hit = false;
@@ -24,14 +33,16 @@ export class Obstacle {
   draw(ctx) {
     if (this.exists) {
       ctx.beginPath();
-      ctx.fillStyle = "rgba(0, 0, 255, 1)";
+      ctx.fillStyle = this.color;
       ctx.strokeStyle = "rgba(0, 0, 0, 1)";
       ctx.fillRect(this.x, this.y, this.width, this.height);
       ctx.strokeRect(this.x, this.y, this.width + 1, this.height + 1);
 
     } else {
-      this.x = this.initX;
-      this.y = this.initY;
+      this.height = random((this.game.height / 10), (this.game.height / 7));
+      this.x = this.game.width + this.width;
+      this.y = this.game.height / 2 - this.height;
+      this.color = randomRGB();
       this.exists = true;
       this.hit = false;
     }
