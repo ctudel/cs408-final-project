@@ -58,14 +58,14 @@ footer p{
 
 
 /* Popup form styling */
-#play-form {
+.popup-form {
   display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-#play-form {
+.popup-form {
   position: fixed;
   top: 0;
   left: 0;
@@ -91,16 +91,15 @@ form {
 
 form input {
   font-size: 1.2rem;
-  padding: 10px;
+  padding: 15px;
   border-radius: 10px;
   border: none;
 }
 
 input[type=submit] {
-  position: fixed;
+  align-self: flex-end;
+  margin-top: 20px;
   width: 100px;
-  top: 58%;
-  right: 45%;
   background-color: #FFD79D;
 }
 

@@ -1,0 +1,25 @@
+/* Leaderboard Table */
+table {
+  width: 100%;
+  height: auto;
+}
+
+table {
+  text-align: center;
+  border-collapse: collapse;
+  color: #fff;
+}
+
+th {
+  padding: 10px;
+  font-size: 1.8rem;
+}
+
+td {
+  padding: 10px;
+  font-size: 1.5rem;
+}
+
+table, th, td {
+  border: 2px #000 solid;
+}

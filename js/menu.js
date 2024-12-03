@@ -33,15 +33,23 @@
 
 const form = document.getElementById("play-form");
 
-/* 
+/*
+ * ===============
  * EVENT LISTENERS
+ * =============== 
  */
 document.getElementById("play").addEventListener('click', () => {
   form.style.display = 'flex';
 });
 
-/* 
- * Helper Functions 
+document.getElementById("leaderboard").addEventListener('click', () => {
+  window.location.href = '/pages/leaderboard.html';
+});
+
+/*
+ * ================
+ * HELPER FUNCTIONS
+ * ================
  */
 let closePopup = (e) => {
   if (e.target == document.getElementById("play-form")) {
