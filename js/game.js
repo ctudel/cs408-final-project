@@ -130,8 +130,6 @@ function stopAnimation() {
 // Program starts here
 // ===================
 startAnimation();
-console.log(playerId);
-
 
 
 
