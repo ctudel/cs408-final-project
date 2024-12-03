@@ -84,11 +84,12 @@ class Game {
 //======================
 
 
-// Animation fields
+// Animation and Processing fields
 const game = new Game();
 let secondsPassed = 0;
 let oldTimeStamp = 0;
 let animation;
+let responseData;
 
 // Animation function
 function loop(timeStamp) {
@@ -100,22 +101,10 @@ function loop(timeStamp) {
   game.collisionDetect();
 
   if (game.endGame) {
-    getPlayerData(playerId);
-    // let playerData = JSON.parse(getPlayerData(playerId));
-
-    const popup = document.querySelector(".popup-container");
-    popup.style.display = 'flex';
-
-    const playerID = document.getElementById("player-id");
-    playerID.innerHTML = `Player ID: ${playerId}`;
-
-    const fScore = document.getElementById("final-score");
-    fScore.innerHTML = `Score: ${game.score}`;
-
-    const enemy = document.getElementById("enemy");
-    enemy.innerHTML = `Hit by: ${enemyName}`;
-    // submitPlayerData(playerData);
+    getAndSubmitPlayerData(playerId);
+    createGameOver();
     stopAnimation();
+
   } else {
     animation = requestAnimationFrame(loop);
   }
@@ -159,24 +148,50 @@ console.log(playerId);
 // ===================
 // Process Player Data
 // ===================
-let getPlayerData = (playerId) => {
-  console.log(playerId);
+
+/* Create a popup once the game is done */
+let createGameOver = () => {
+  const popup = document.querySelector(".popup-container");
+  popup.style.display = 'flex';
+
+  const playerID = document.getElementById("player-id");
+  playerID.innerHTML = `Player ID: ${playerId}`;
+
+  const fScore = document.getElementById("final-score");
+  fScore.innerHTML = `Score: ${game.score}`;
+
+  const enemy = document.getElementById("enemy");
+  enemy.innerHTML = `Hit by: ${enemyName}`;
+}
+
+/* Get a certain player's data if exists */
+let getAndSubmitPlayerData = (playerId) => {
   let xhr = new XMLHttpRequest();
+  xhr.open("GET", `https://lem6e5tfn2.execute-api.us-east-2.amazonaws.com/items/${playerId}`);
+  xhr.send();
+
   // Wait for data to be fetched
-  xhr.onload = () => {
-    if (xhr.response) {
-      let responseData = JSON.parse(xhr.response);
-      console.log(responseData);
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      let responseData;
+      if (xhr.response) responseData = JSON.parse(xhr.response); // if user exists parse data
+
+      const playerData = {
+        "id": playerId,
+        "highScore": (responseData && responseData["highScore"] > game.score)
+          ? responseData["highScore"]
+          : game.score,
+        "enemyName": enemyName
+      }
+
+      commitData(playerData);
     }
   };
-  // TODO: uncomment for real functionality
-  // xhr.open("GET", `https://lem6e5tfn2.execute-api.us-east-2.amazonaws.com/items/${playerId}`);
-  xhr.open("GET", "https://lem6e5tfn2.execute-api.us-east-2.amazonaws.com/items/123");
-  xhr.send();
 
 }
 
-let submitPlayerData = (playerData) => {
+/* Send player data to database */
+let commitData = (playerData) => {
   let xhr = new XMLHttpRequest();
   xhr.open("PUT", "https://lem6e5tfn2.execute-api.us-east-2.amazonaws.com/items");
   xhr.setRequestHeader("Content-Type", "application/json");
