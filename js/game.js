@@ -7,6 +7,7 @@ import { Background } from "./background.js";
 const urlParams = new URLSearchParams(window.location.search);
 const result = urlParams.get('id');
 let playerId = (result != '' && result != null) ? result : "Anonymous";
+let enemyName = 'Evil Block';
 console.log('Player ID: ' + playerId);
 
 // set up canvas
@@ -87,6 +88,7 @@ class Game {
 const game = new Game();
 let secondsPassed = 0;
 let oldTimeStamp = 0;
+let animation;
 
 // Animation function
 function loop(timeStamp) {
@@ -98,6 +100,8 @@ function loop(timeStamp) {
   game.collisionDetect();
 
   if (game.endGame) {
+    getPlayerData(playerId);
+    // let playerData = JSON.parse(getPlayerData(playerId));
 
     const popup = document.querySelector(".popup-container");
     popup.style.display = 'flex';
@@ -108,11 +112,13 @@ function loop(timeStamp) {
     const fScore = document.getElementById("final-score");
     fScore.innerHTML = `Score: ${game.score}`;
 
-    cancelAnimationFrame();
+    const enemy = document.getElementById("enemy");
+    enemy.innerHTML = `Hit by: ${enemyName}`;
+    // submitPlayerData(playerData);
+    stopAnimation();
+  } else {
+    animation = requestAnimationFrame(loop);
   }
-
-  // When all balls are eaten, go to the next round
-  requestAnimationFrame(loop);
 }
 
 // Persist parameters on refresh
@@ -121,9 +127,59 @@ document.getElementById("replay").addEventListener('click', () => {
   window.location.href = url;
 });
 
+// Starts animation
+function startAnimation() {
+  animation = requestAnimationFrame(loop);
+}
+
+// Stops animation
+function stopAnimation() {
+  cancelAnimationFrame(animation);
+}
+
 // ===================
 // Program starts here
 // ===================
-requestAnimationFrame(loop);
+startAnimation();
 console.log(playerId);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ===================
+// Process Player Data
+// ===================
+let getPlayerData = (playerId) => {
+  console.log(playerId);
+  let xhr = new XMLHttpRequest();
+  // Wait for data to be fetched
+  xhr.onload = () => {
+    if (xhr.response) {
+      let responseData = JSON.parse(xhr.response);
+      console.log(responseData);
+    }
+  };
+  // TODO: uncomment for real functionality
+  // xhr.open("GET", `https://lem6e5tfn2.execute-api.us-east-2.amazonaws.com/items/${playerId}`);
+  xhr.open("GET", "https://lem6e5tfn2.execute-api.us-east-2.amazonaws.com/items/123");
+  xhr.send();
+
+}
+
+let submitPlayerData = (playerData) => {
+  let xhr = new XMLHttpRequest();
+  xhr.open("PUT", "https://lem6e5tfn2.execute-api.us-east-2.amazonaws.com/items");
+  xhr.setRequestHeader("Content-Type", "application/json");
+  console.log(JSON.stringify(playerData));
+  xhr.send(JSON.stringify(playerData));
+}
