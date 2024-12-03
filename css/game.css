@@ -53,7 +53,7 @@ canvas {
 
 #gameover {
   width: 300px;
-  height: 300px;
+  height: auto;
   padding: 10px;
   background-color: #FFCD85;
   border: 10px solid  #FFD79D;
