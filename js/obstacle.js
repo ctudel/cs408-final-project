@@ -8,6 +8,7 @@ function randomRGB() {
   return `rgb(${random(150, 255)},${random(150, 255)},${random(150, 255)})`;
 }
 
+
 export class Obstacle {
   constructor(game, width, height, exists) {
     this.game = game;
@@ -21,13 +22,13 @@ export class Obstacle {
     this.hit = false;
   }
 
-  update(secondsPassed) {
+  update() {
     if (this.exists && this.x > -this.width) {
       this.x -= this.game.speed * this.speedFactor;
-
     } else {
       this.exists = false;
     }
+    console.log(this.y);
   }
 
   draw(ctx) {
@@ -39,12 +40,17 @@ export class Obstacle {
       ctx.strokeRect(this.x, this.y, this.width + 1, this.height + 1);
 
     } else {
-      this.height = random((this.game.height / 10), (this.game.height / 7));
+      this.height = random(200 - this.game.player.size, (this.game.height / 2 - (this.game.player.size + 20)));
       this.x = this.game.width + this.width;
-      this.y = this.game.height / 2 - this.height;
+      this.y = this.topOrBottom();
+      console.log('y: ' + this.y);
       this.color = randomRGB();
       this.exists = true;
       this.hit = false;
     }
+  }
+
+  topOrBottom() {
+    return (Math.random() >= 0.5) ? 0 : this.game.height / 2 - this.height;
   }
 }
