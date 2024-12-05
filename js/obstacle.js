@@ -43,7 +43,6 @@ export class Obstacle {
       this.height = random(200 - this.game.player.size, (this.game.height / 2 - (this.game.player.size + 20)));
       this.x = this.game.width + this.width;
       this.y = this.topOrBottom();
-      console.log('y: ' + this.y);
       this.color = randomRGB();
       this.exists = true;
       this.hit = false;
