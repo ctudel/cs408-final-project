@@ -10,12 +10,16 @@ let playerId = (result != '' && result != null) ? result : "Anonymous";
 let enemyName = 'Evil Block';
 console.log('Player ID: ' + playerId);
 
+
 // set up canvas
 const canvas = document.querySelector("canvas");
 const context = canvas.getContext("2d");
 const score = document.getElementById("counter");
 const width = (canvas.width = Math.min(1000, window.innerWidth));
 const height = (canvas.height = window.innerHeight);
+const tutorial = document.querySelector(".tutorial")
+
+let startGame = false;
 
 // function to generate random number
 function random(min, max) {
@@ -42,10 +46,12 @@ class Game {
   }
 
   update() {
-    this.background.update();
-    this.obstacle.update();
-    this.player.update(secondsPassed);
-    this.incrementScore();
+    if (startGame) {
+      this.background.update();
+      this.obstacle.update();
+      this.player.update(secondsPassed);
+      this.incrementScore();
+    }
   }
 
   draw() {
@@ -67,14 +73,16 @@ class Game {
   }
 
   collisionDetect() {
-    this.player.collisionDetect();
+    if (startGame) this.player.collisionDetect();
   }
 
   incrementScore() {
-    const dodged = this.obstacle.x - this.obstacle.width < this.player.x;
-    if (!this.obstacle.hit && dodged) {
-      score.innerHTML = `Score: ${++this.score}`;
-      this.obstacle.hit = true;
+    if (startGame) {
+      const dodged = this.obstacle.x - this.obstacle.width < this.player.x;
+      if (!this.obstacle.hit && dodged) {
+        score.innerHTML = `Score: ${++this.score}`;
+        this.obstacle.hit = true;
+      }
     }
   }
 }
@@ -89,7 +97,6 @@ const game = new Game();
 let secondsPassed = 0;
 let oldTimeStamp = 0;
 let animation;
-let responseData;
 
 // Animation function
 function loop(timeStamp) {
@@ -129,11 +136,17 @@ function stopAnimation() {
 // ===================
 // Program starts here
 // ===================
+
+window.addEventListener('keypress', (e) => {
+  console.log('pressed');
+  if (e.key === ' ' || e.key === 'w') {
+    tutorial.style.display = 'none';
+    startGame = true;
+  }
+});
+
 startAnimation();
-
-
-
-
+createTutorial();
 
 
 
@@ -160,6 +173,12 @@ let createGameOver = () => {
 
   const enemy = document.getElementById("enemy");
   enemy.innerHTML = `Hit by: ${enemyName}`;
+}
+
+function createTutorial() {
+  console.dir(tutorial);
+  const tHeader = document.getElementById("t-header");
+  tHeader.innerHTML = `Hi, ${playerId}! Here's how to play.`;
 }
 
 /* Get a certain player's data if exists */
