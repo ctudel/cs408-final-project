@@ -1,37 +1,5 @@
-// let playerId = '';
-// let lastEnemy = '';
-// let highScore = 0;
-//
-//
-// /* 
-//  * GET
-//  * Get Items and update table
-//  */
-// let getData = () => {
-//   let xhr = new XMLHttpRequest();
-//   xhr.open("GET", "https://lem6e5tfn2.execute-api.us-east-2.amazonaws.com/items");
-//   xhr.send();
-// }
-//
-// let getPlayer = (id) => {
-//   playerId = id;
-//   let xhr = new XMLHttpRequest();
-//
-//   xhr.open("GET", `https://lem6e5tfn2.execute-api.us-east-2.amazonaws.com/items/${id}`);
-//   xhr.send();
-//
-//   getPlayerInfo(xhr);
-// }
-//
-// let getPlayerInfo = (xhr) => {
-//   if (xhr.response) {
-//     const player = JSON.parse(xhr.response);
-//     lastEnemy = player.enemyName;
-//     highScore = player.highScore;
-//   }
-// }
-
-const form = document.getElementById("play-form");
+const playForm = document.getElementById("play-form");
+const profileForm = document.getElementById("profile-form");
 
 /*
  * ===============
@@ -39,11 +7,15 @@ const form = document.getElementById("play-form");
  * =============== 
  */
 document.getElementById("play").addEventListener('click', () => {
-  form.style.display = 'flex';
+  playForm.style.display = 'flex';
 });
 
 document.getElementById("leaderboard").addEventListener('click', () => {
   window.location.href = '/pages/leaderboard.html';
+});
+
+document.getElementById("profile").addEventListener('click', () => {
+  profileForm.style.display = 'flex';
 });
 
 /*
@@ -53,7 +25,7 @@ document.getElementById("leaderboard").addEventListener('click', () => {
  */
 let closePopup = (e) => {
   if (e.target == document.getElementById("play-form")) {
-    form.style.display = "none";
+    playForm.style.display = "none";
   }
 }
 
