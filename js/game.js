@@ -100,8 +100,6 @@ let animation;
 
 // Animation function
 function loop(timeStamp) {
-  secondsPassed = (timeStamp - oldTimeStamp) / 1000;
-  oldTimeStamp = timeStamp;
 
   game.update();
   game.draw();

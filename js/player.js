@@ -12,13 +12,13 @@ export class Player {
     // Player jump event
     window.addEventListener("keypress", (e) => {
       if (this.y > 0 && (e.key === 'w' || e.key === ' ')) {
-        this.accelerate(-0.5);
+        this.accelerate(-0.3);
       }
     });
 
 
     window.addEventListener("keyup", () => {
-      this.accelerate(0.3);
+      this.accelerate(0.1);
     })
   }
 

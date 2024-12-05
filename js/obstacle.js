@@ -17,7 +17,7 @@ export class Obstacle {
     this.width = width;
     this.height = height;
     this.color = randomRGB();
-    this.speedFactor = game.width * 0.003;
+    this.speedFactor = game.width * 0.001;
     this.exists = exists;
     this.hit = false;
   }
