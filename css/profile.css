@@ -1,0 +1,41 @@
+p {
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+div[id="grid"] {
+  display: grid;
+  padding-top: 30px;;
+}
+
+#stats {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#stats {
+  padding: 20px;
+  grid-column: 2/6;
+}
+
+#player {
+  display: none;
+  margin: auto;
+  padding: 30px;
+  background-color: #FFCD85;
+  border: 5px #6C76FD solid;
+  border-radius: 15px;
+}
+
+#stat {
+  text-align: center;
+  background-color: #FFCD85;
+  border: 5px #6C76FD solid;
+  border-radius: 15px;
+}
+
+#stat p, 
+#player p {
+  color: #000;
+}
