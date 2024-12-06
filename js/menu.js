@@ -24,10 +24,10 @@ document.getElementById("profile").addEventListener('click', () => {
  * ================
  */
 let closePopup = (e) => {
-  if (e.target == document.getElementById("play-form")) {
+  if (e.target == playForm || e.target == profileForm) {
     playForm.style.display = "none";
+    profileForm.style.display = "none";
   }
 }
 
 window.onclick = closePopup;
-

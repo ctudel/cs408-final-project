@@ -31,7 +31,7 @@ function randomRGB() {
   return `rgb(${random(150, 255)},${random(150, 255)},${random(150, 255)})`;
 }
 
-class Game {
+export class Game {
   constructor() {
     this.width = width;
     this.height = height;

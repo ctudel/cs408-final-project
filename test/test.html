@@ -1,12 +1,48 @@
 <!DOCTYPE html>
 <html>
-<meta charset="utf-8">
-<title>QUnit</title>
-<link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.21.0.css">
-<body>
-  <div id="qunit"></div>
-  <div id="qunit-fixture"></div>
-  <script src="https://code.jquery.com/qunit/qunit-2.21.0.js"></script>
-  <script type="module" src="test.js"></script>
-</body>
+  <meta charset="utf-8">
+  <title>QUnit</title>
+  <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.21.0.css">
+  <style>
+  .popup-container {display: none;}
+  .tutorial {display: none;}
+  .game {display: none;}
+  </style>
+  <body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+
+    <!--HTML skeleton for game to work-->
+    <div class="popup-container">
+      <div id="gameover">
+        <h2 id="final-score"></h2>
+        <p id="player-id"></p>
+        <p id="enemy"></p>
+        <button id="replay"><img alt="replay button" src="../img/assets/replay.png">Replay</button>
+      </div>
+    </div>
+
+    <div class="tutorial">
+      <div id="tut-info">
+        <h2 id="t-header">How To Play</h2>
+        <p id="t-text">Tap space bar to go higher. That's it, enjoy!</p>
+        <p id="play-text" style="text-align:center;">Press Space Bar to START</p>
+      </div>
+    </div>
+
+    <div class="game">
+      <canvas></canvas>
+      <img id="layer1" class="layer" alt="sky background" src="../img/assets/sky.png"/>
+      <img id="layer2" class="layer" alt="cloud 1 for background" src="../img/assets/clouds_1.png"/>
+      <img id="layer3" class="layer" alt="cloud 2 for background" src="../img/assets/clouds_2.png"/>
+      <img id="layer4" class="layer" alt="cloud 3 for background" src="../img/assets/clouds_3.png"/>
+      <img id="layer5" class="layer" alt="mountain background 1" src="../img/assets/rocks_1.png"/>
+      <img id="layer6" class="layer" alt="mountain background 2" src="../img/assets/rocks_2.png"/>
+      <img id="layer7" class="layer" alt="trees" src="../img/assets/pines.png"/>
+      <h2 id="counter">Score: 0</h2>
+    </div>
+
+    <script src="https://code.jquery.com/qunit/qunit-2.21.0.js"></script>
+    <script type="module" src="test.js"></script>
+  </body>
 </html>
