@@ -64,9 +64,15 @@ let populateProfileInfo = (playerId) => {
   const p = document.createElement("p");
   p.innerHTML = `Player: ${playerId}`;
 
+  const delBtn = document.createElement("button");
+  delBtn.innerHTML = 'Delete Player';
+  delBtn.id = 'del-btn';
+
   pInfo.appendChild(divBlock);
   pInfo.appendChild(p);
+  pInfo.appendChild(delBtn);
   pInfo.style.display = "block";
+  delBtnListener(delBtn);
 }
 
 let generateStats = (highScore, enemyName) => {
@@ -103,6 +109,28 @@ let generateStats = (highScore, enemyName) => {
   stats.style.display = "flex";
 }
 
+let delBtnListener = (delBtn) => {
+  delBtn.addEventListener('click', () => {
+    userIn = prompt("Type your player id to confirm");
+    if (userIn === playerId) {
+      deletePlayer();
+    } else {
+      alert('Incorrect player id, cancelling request');
+    }
+  });
+}
+
+let deletePlayer = () => {
+  const xhr = new XMLHttpRequest();
+  xhr.open("DELETE", `https://lem6e5tfn2.execute-api.us-east-2.amazonaws.com/items/${playerId}`);
+
+  xhr.onload = () => {
+    alert(`Player ${playerId} has been deleted`);
+    window.location.href = '/index.html';
+  }
+
+  xhr.send();
+}
 
 function randomRGB() {
   return `rgb(${random(150, 255)},${random(150, 255)},${random(150, 255)})`;

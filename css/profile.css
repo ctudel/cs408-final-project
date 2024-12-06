@@ -39,3 +39,11 @@ div[id="grid"] {
 #player p {
   color: #000;
 }
+
+#player p {
+  font-size: 1.5rem;
+}
+
+#del-btn {
+  font-size: 0.8rem;
+}
